@@ -315,11 +315,15 @@ class MidiParser {
           return event;
         case 0x0e:
           var event = PitchBendEvent();
+          int data2 = p.readUInt8();
           event.channel = channel;
           event.deltaTime = deltaTime;
           event.running = running;
           event.type = 'pitchBend';
-          event.value = (param1 + (p.readUInt8() << 7)) - 0x2000;
+          event.data1 = param1;
+          event.data2 = data2;
+          event.value = (param1 + (data2 << 7)) - 0x2000;
+          print('got pitch data2: $data2');
           return event;
         default:
           throw 'Unrecognised MIDI event type: ${eventType.toString()}';

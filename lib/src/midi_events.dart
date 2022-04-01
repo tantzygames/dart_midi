@@ -64,6 +64,8 @@ class ChannelAfterTouchEvent extends MidiEvent {
 class PitchBendEvent extends MidiEvent {
   int channel = 0;
   int value = 0; // A pitch bend value from -8192 to 8191. Defaults to 0, or no bend.
+  int data1 = 0;
+  int data2 = 0;
 
   int writeEvent(ByteWriter w) {
     var eventTypeByte = 0xE0 | channel;
